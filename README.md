@@ -209,3 +209,782 @@ If you have any questions, suggestions, or need assistance, please open an issue
 ---
 
 Created by [Timothy Jaeryang Baek](https://github.com/tjbck) - Let's make Open WebUI even more amazing together! 💪
+
+
+```
+open-webui
+├─ .dockerignore
+├─ .eslintignore
+├─ .eslintrc.cjs
+├─ .git
+│  ├─ HEAD
+│  ├─ config
+│  ├─ description
+│  ├─ hooks
+│  │  ├─ applypatch-msg.sample
+│  │  ├─ commit-msg.sample
+│  │  ├─ fsmonitor-watchman.sample
+│  │  ├─ post-update.sample
+│  │  ├─ pre-applypatch.sample
+│  │  ├─ pre-commit.sample
+│  │  ├─ pre-merge-commit.sample
+│  │  ├─ pre-push.sample
+│  │  ├─ pre-rebase.sample
+│  │  ├─ pre-receive.sample
+│  │  ├─ prepare-commit-msg.sample
+│  │  └─ update.sample
+│  ├─ index
+│  ├─ info
+│  │  └─ exclude
+│  ├─ objects
+│  │  ├─ info
+│  │  └─ pack
+│  │     ├─ pack-f060fb32a741711fd4737bec41e51f5b8adf2dc4.idx
+│  │     └─ pack-f060fb32a741711fd4737bec41e51f5b8adf2dc4.pack
+│  ├─ packed-refs
+│  └─ refs
+│     ├─ heads
+│     │  ├─ dev
+│     │  └─ main
+│     ├─ remotes
+│     │  └─ origin
+│     │     └─ HEAD
+│     └─ tags
+├─ .gitattributes
+├─ .github
+│  ├─ FUNDING.yml
+│  ├─ ISSUE_TEMPLATE
+│  │  ├─ bug_report.md
+│  │  └─ feature_request.md
+│  ├─ dependabot.yml
+│  ├─ pull_request_template.md
+│  └─ workflows
+│     ├─ build-release.yml
+│     ├─ deploy-to-hf-spaces.yml
+│     ├─ docker-build.yaml
+│     ├─ format-backend.yaml
+│     ├─ format-build-frontend.yaml
+│     ├─ integration-test.yml
+│     ├─ lint-backend.disabled
+│     ├─ lint-frontend.disabled
+│     └─ release-pypi.yml
+├─ .gitignore
+├─ .prettierignore
+├─ .prettierrc
+├─ CHANGELOG.md
+├─ CODE_OF_CONDUCT.md
+├─ Caddyfile.localhost
+├─ Dockerfile
+├─ INSTALLATION.md
+├─ LICENSE
+├─ Makefile
+├─ README.md
+├─ TROUBLESHOOTING.md
+├─ backend
+│  ├─ .dockerignore
+│  ├─ .gitignore
+│  ├─ data
+│  │  └─ readme.txt
+│  ├─ dev.sh
+│  ├─ open_webui
+│  │  ├─ __init__.py
+│  │  ├─ alembic.ini
+│  │  ├─ apps
+│  │  │  ├─ audio
+│  │  │  │  └─ main.py
+│  │  │  ├─ images
+│  │  │  │  ├─ main.py
+│  │  │  │  └─ utils
+│  │  │  │     └─ comfyui.py
+│  │  │  ├─ ollama
+│  │  │  │  └─ main.py
+│  │  │  ├─ openai
+│  │  │  │  └─ main.py
+│  │  │  ├─ retrieval
+│  │  │  │  ├─ loaders
+│  │  │  │  │  ├─ github_loader.py
+│  │  │  │  │  └─ main.py
+│  │  │  │  ├─ main.py
+│  │  │  │  ├─ models
+│  │  │  │  │  └─ colbert.py
+│  │  │  │  ├─ utils.py
+│  │  │  │  ├─ vector
+│  │  │  │  │  ├─ connector.py
+│  │  │  │  │  ├─ dbs
+│  │  │  │  │  │  ├─ chroma.py
+│  │  │  │  │  │  ├─ milvus.py
+│  │  │  │  │  │  ├─ opensearch.py
+│  │  │  │  │  │  ├─ pgvector.py
+│  │  │  │  │  │  └─ qdrant.py
+│  │  │  │  │  └─ main.py
+│  │  │  │  └─ web
+│  │  │  │     ├─ bing.py
+│  │  │  │     ├─ brave.py
+│  │  │  │     ├─ duckduckgo.py
+│  │  │  │     ├─ google_pse.py
+│  │  │  │     ├─ jina_search.py
+│  │  │  │     ├─ main.py
+│  │  │  │     ├─ searchapi.py
+│  │  │  │     ├─ searxng.py
+│  │  │  │     ├─ serper.py
+│  │  │  │     ├─ serply.py
+│  │  │  │     ├─ serpstack.py
+│  │  │  │     ├─ tavily.py
+│  │  │  │     ├─ testdata
+│  │  │  │     │  ├─ bing.json
+│  │  │  │     │  ├─ brave.json
+│  │  │  │     │  ├─ google_pse.json
+│  │  │  │     │  ├─ searchapi.json
+│  │  │  │     │  ├─ searxng.json
+│  │  │  │     │  ├─ serper.json
+│  │  │  │     │  ├─ serply.json
+│  │  │  │     │  └─ serpstack.json
+│  │  │  │     └─ utils.py
+│  │  │  ├─ socket
+│  │  │  │  ├─ main.py
+│  │  │  │  └─ utils.py
+│  │  │  └─ webui
+│  │  │     ├─ internal
+│  │  │     │  ├─ db.py
+│  │  │     │  ├─ migrations
+│  │  │     │  │  ├─ 001_initial_schema.py
+│  │  │     │  │  ├─ 002_add_local_sharing.py
+│  │  │     │  │  ├─ 003_add_auth_api_key.py
+│  │  │     │  │  ├─ 004_add_archived.py
+│  │  │     │  │  ├─ 005_add_updated_at.py
+│  │  │     │  │  ├─ 006_migrate_timestamps_and_charfields.py
+│  │  │     │  │  ├─ 007_add_user_last_active_at.py
+│  │  │     │  │  ├─ 008_add_memory.py
+│  │  │     │  │  ├─ 009_add_models.py
+│  │  │     │  │  ├─ 010_migrate_modelfiles_to_models.py
+│  │  │     │  │  ├─ 011_add_user_settings.py
+│  │  │     │  │  ├─ 012_add_tools.py
+│  │  │     │  │  ├─ 013_add_user_info.py
+│  │  │     │  │  ├─ 014_add_files.py
+│  │  │     │  │  ├─ 015_add_functions.py
+│  │  │     │  │  ├─ 016_add_valves_and_is_active.py
+│  │  │     │  │  ├─ 017_add_user_oauth_sub.py
+│  │  │     │  │  └─ 018_add_function_is_global.py
+│  │  │     │  └─ wrappers.py
+│  │  │     ├─ main.py
+│  │  │     ├─ models
+│  │  │     │  ├─ auths.py
+│  │  │     │  ├─ chats.py
+│  │  │     │  ├─ feedbacks.py
+│  │  │     │  ├─ files.py
+│  │  │     │  ├─ folders.py
+│  │  │     │  ├─ functions.py
+│  │  │     │  ├─ groups.py
+│  │  │     │  ├─ knowledge.py
+│  │  │     │  ├─ memories.py
+│  │  │     │  ├─ models.py
+│  │  │     │  ├─ prompts.py
+│  │  │     │  ├─ secrets.py
+│  │  │     │  ├─ tags.py
+│  │  │     │  ├─ tools.py
+│  │  │     │  └─ users.py
+│  │  │     └─ utils.py
+│  │  ├─ config.py
+│  │  ├─ constants.py
+│  │  ├─ data
+│  │  │  └─ readme.txt
+│  │  ├─ env.py
+│  │  ├─ main.py
+│  │  ├─ migrations
+│  │  │  ├─ README
+│  │  │  ├─ env.py
+│  │  │  ├─ script.py.mako
+│  │  │  ├─ util.py
+│  │  │  └─ versions
+│  │  │     ├─ 1af9b942657b_migrate_tags.py
+│  │  │     ├─ 242a2047eae0_update_chat_table.py
+│  │  │     ├─ 3ab32c4b8f59_update_tags.py
+│  │  │     ├─ 4ace53fd72c8_update_folder_table_datetime.py
+│  │  │     ├─ 6a39f3d8e55c_add_knowledge_table.py
+│  │  │     ├─ 7e5b5dc7342b_init.py
+│  │  │     ├─ 922e7a387820_add_group_table.py
+│  │  │     ├─ af906e964978_add_feedback_table.py
+│  │  │     ├─ c0fbf31ca0db_update_file_table.py
+│  │  │     ├─ c29facfe716b_update_file_table_path.py
+│  │  │     ├─ c69f45358db4_add_folder_table.py
+│  │  │     └─ ca81bd47c050_add_config_table.py
+│  │  ├─ static
+│  │  │  ├─ assets
+│  │  │  │  └─ pdf-style.css
+│  │  │  ├─ favicon.png
+│  │  │  ├─ fonts
+│  │  │  │  ├─ NotoSans-Bold.ttf
+│  │  │  │  ├─ NotoSans-Italic.ttf
+│  │  │  │  ├─ NotoSans-Regular.ttf
+│  │  │  │  ├─ NotoSans-Variable.ttf
+│  │  │  │  ├─ NotoSansJP-Regular.ttf
+│  │  │  │  ├─ NotoSansJP-Variable.ttf
+│  │  │  │  ├─ NotoSansKR-Regular.ttf
+│  │  │  │  ├─ NotoSansKR-Variable.ttf
+│  │  │  │  ├─ NotoSansSC-Regular.ttf
+│  │  │  │  └─ NotoSansSC-Variable.ttf
+│  │  │  ├─ logo.png
+│  │  │  ├─ splash.png
+│  │  │  └─ user-import.csv
+│  │  ├─ storage
+│  │  │  └─ provider.py
+│  │  ├─ test
+│  │  │  ├─ __init__.py
+│  │  │  ├─ apps
+│  │  │  │  └─ webui
+│  │  │  └─ util
+│  │  │     ├─ abstract_integration_test.py
+│  │  │     └─ mock_user.py
+│  │  └─ utils
+│  │     ├─ access_control.py
+│  │     ├─ logo.png
+│  │     ├─ misc.py
+│  │     ├─ oauth.py
+│  │     ├─ payload.py
+│  │     ├─ pdf_generator.py
+│  │     ├─ response.py
+│  │     ├─ schemas.py
+│  │     ├─ security_headers.py
+│  │     ├─ task.py
+│  │     ├─ tools.py
+│  │     ├─ utils.py
+│  │     └─ webhook.py
+│  ├─ requirements.txt
+│  ├─ start.sh
+│  └─ start_windows.bat
+├─ confirm_remove.sh
+├─ cypress
+│  ├─ data
+│  │  └─ example-doc.txt
+│  ├─ e2e
+│  │  ├─ chat.cy.ts
+│  │  ├─ documents.cy.ts
+│  │  ├─ registration.cy.ts
+│  │  └─ settings.cy.ts
+│  ├─ support
+│  │  ├─ e2e.ts
+│  │  └─ index.d.ts
+│  └─ tsconfig.json
+├─ cypress.config.ts
+├─ demo.gif
+├─ docker-compose.a1111-test.yaml
+├─ docker-compose.amdgpu.yaml
+├─ docker-compose.api.yaml
+├─ docker-compose.data.yaml
+├─ docker-compose.gpu.yaml
+├─ docker-compose.yaml
+├─ docs
+│  ├─ CONTRIBUTING.md
+│  ├─ README.md
+│  ├─ SECURITY.md
+│  └─ apache.md
+├─ hatch_build.py
+├─ i18next-parser.config.ts
+├─ kubernetes
+│  ├─ helm
+│  │  └─ README.md
+│  └─ manifest
+│     ├─ base
+│     │  ├─ kustomization.yaml
+│     │  ├─ ollama-service.yaml
+│     │  ├─ ollama-statefulset.yaml
+│     │  ├─ open-webui.yaml
+│     │  ├─ webui-deployment.yaml
+│     │  ├─ webui-ingress.yaml
+│     │  ├─ webui-pvc.yaml
+│     │  └─ webui-service.yaml
+│     └─ gpu
+│        ├─ kustomization.yaml
+│        └─ ollama-statefulset-gpu.yaml
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.js
+├─ pyproject.toml
+├─ run-compose.sh
+├─ run-ollama-docker.sh
+├─ run.sh
+├─ scripts
+│  └─ prepare-pyodide.js
+├─ src
+│  ├─ app.css
+│  ├─ app.d.ts
+│  ├─ app.html
+│  ├─ lib
+│  │  ├─ apis
+│  │  │  ├─ audio
+│  │  │  │  └─ index.ts
+│  │  │  ├─ auths
+│  │  │  │  └─ index.ts
+│  │  │  ├─ chats
+│  │  │  │  └─ index.ts
+│  │  │  ├─ configs
+│  │  │  │  └─ index.ts
+│  │  │  ├─ evaluations
+│  │  │  │  └─ index.ts
+│  │  │  ├─ files
+│  │  │  │  └─ index.ts
+│  │  │  ├─ folders
+│  │  │  │  └─ index.ts
+│  │  │  ├─ functions
+│  │  │  │  └─ index.ts
+│  │  │  ├─ groups
+│  │  │  │  └─ index.ts
+│  │  │  ├─ images
+│  │  │  │  └─ index.ts
+│  │  │  ├─ index.ts
+│  │  │  ├─ knowledge
+│  │  │  │  └─ index.ts
+│  │  │  ├─ memories
+│  │  │  │  └─ index.ts
+│  │  │  ├─ models
+│  │  │  │  └─ index.ts
+│  │  │  ├─ ollama
+│  │  │  │  └─ index.ts
+│  │  │  ├─ openai
+│  │  │  │  └─ index.ts
+│  │  │  ├─ prompts
+│  │  │  │  └─ index.ts
+│  │  │  ├─ retrieval
+│  │  │  │  └─ index.ts
+│  │  │  ├─ streaming
+│  │  │  │  └─ index.ts
+│  │  │  ├─ tools
+│  │  │  │  └─ index.ts
+│  │  │  ├─ users
+│  │  │  │  └─ index.ts
+│  │  │  └─ utils
+│  │  │     └─ index.ts
+│  │  ├─ components
+│  │  │  ├─ AddFilesPlaceholder.svelte
+│  │  │  ├─ ChangelogModal.svelte
+│  │  │  ├─ OnBoarding.svelte
+│  │  │  ├─ admin
+│  │  │  │  ├─ Evaluations
+│  │  │  │  │  ├─ FeedbackMenu.svelte
+│  │  │  │  │  ├─ Feedbacks.svelte
+│  │  │  │  │  └─ Leaderboard.svelte
+│  │  │  │  ├─ Evaluations.svelte
+│  │  │  │  ├─ Functions
+│  │  │  │  │  ├─ FunctionEditor.svelte
+│  │  │  │  │  └─ FunctionMenu.svelte
+│  │  │  │  ├─ Functions.svelte
+│  │  │  │  ├─ Settings
+│  │  │  │  │  ├─ Audio.svelte
+│  │  │  │  │  ├─ Connections
+│  │  │  │  │  │  ├─ AddConnectionModal.svelte
+│  │  │  │  │  │  ├─ ManageOllamaModal.svelte
+│  │  │  │  │  │  ├─ OllamaConnection.svelte
+│  │  │  │  │  │  └─ OpenAIConnection.svelte
+│  │  │  │  │  ├─ Connections.svelte
+│  │  │  │  │  ├─ Database.svelte
+│  │  │  │  │  ├─ Documents.svelte
+│  │  │  │  │  ├─ Evaluations
+│  │  │  │  │  │  ├─ ArenaModelModal.svelte
+│  │  │  │  │  │  └─ Model.svelte
+│  │  │  │  │  ├─ Evaluations.svelte
+│  │  │  │  │  ├─ General.svelte
+│  │  │  │  │  ├─ Images.svelte
+│  │  │  │  │  ├─ Interface.svelte
+│  │  │  │  │  ├─ Models.svelte
+│  │  │  │  │  ├─ Pipelines.svelte
+│  │  │  │  │  └─ WebSearch.svelte
+│  │  │  │  ├─ Settings.svelte
+│  │  │  │  ├─ Users
+│  │  │  │  │  ├─ Groups
+│  │  │  │  │  │  ├─ AddGroupModal.svelte
+│  │  │  │  │  │  ├─ Display.svelte
+│  │  │  │  │  │  ├─ EditGroupModal.svelte
+│  │  │  │  │  │  ├─ GroupItem.svelte
+│  │  │  │  │  │  ├─ Permissions.svelte
+│  │  │  │  │  │  └─ Users.svelte
+│  │  │  │  │  ├─ Groups.svelte
+│  │  │  │  │  ├─ UserList
+│  │  │  │  │  │  ├─ AddUserModal.svelte
+│  │  │  │  │  │  ├─ EditUserModal.svelte
+│  │  │  │  │  │  └─ UserChatsModal.svelte
+│  │  │  │  │  └─ UserList.svelte
+│  │  │  │  └─ Users.svelte
+│  │  │  ├─ chat
+│  │  │  │  ├─ Artifacts.svelte
+│  │  │  │  ├─ Chat.svelte
+│  │  │  │  ├─ ChatControls.svelte
+│  │  │  │  ├─ ChatPlaceholder.svelte
+│  │  │  │  ├─ Controls
+│  │  │  │  │  ├─ Controls.svelte
+│  │  │  │  │  └─ Valves.svelte
+│  │  │  │  ├─ MessageInput
+│  │  │  │  │  ├─ CallOverlay
+│  │  │  │  │  │  └─ VideoInputMenu.svelte
+│  │  │  │  │  ├─ CallOverlay.svelte
+│  │  │  │  │  ├─ Commands
+│  │  │  │  │  │  ├─ Knowledge.svelte
+│  │  │  │  │  │  ├─ Models.svelte
+│  │  │  │  │  │  └─ Prompts.svelte
+│  │  │  │  │  ├─ Commands.svelte
+│  │  │  │  │  ├─ FilesOverlay.svelte
+│  │  │  │  │  ├─ InputMenu.svelte
+│  │  │  │  │  └─ VoiceRecording.svelte
+│  │  │  │  ├─ MessageInput.svelte
+│  │  │  │  ├─ Messages
+│  │  │  │  │  ├─ Citations.svelte
+│  │  │  │  │  ├─ CitationsModal.svelte
+│  │  │  │  │  ├─ CodeBlock.svelte
+│  │  │  │  │  ├─ CodeExecutionModal.svelte
+│  │  │  │  │  ├─ CodeExecutions.svelte
+│  │  │  │  │  ├─ ContentRenderer.svelte
+│  │  │  │  │  ├─ Error.svelte
+│  │  │  │  │  ├─ Markdown
+│  │  │  │  │  │  ├─ KatexRenderer.svelte
+│  │  │  │  │  │  ├─ MarkdownInlineTokens.svelte
+│  │  │  │  │  │  └─ MarkdownTokens.svelte
+│  │  │  │  │  ├─ Markdown.svelte
+│  │  │  │  │  ├─ Message.svelte
+│  │  │  │  │  ├─ MultiResponseMessages.svelte
+│  │  │  │  │  ├─ Name.svelte
+│  │  │  │  │  ├─ ProfileImage.svelte
+│  │  │  │  │  ├─ RateComment.svelte
+│  │  │  │  │  ├─ ResponseMessage
+│  │  │  │  │  │  └─ WebSearchResults.svelte
+│  │  │  │  │  ├─ ResponseMessage.svelte
+│  │  │  │  │  ├─ Skeleton.svelte
+│  │  │  │  │  └─ UserMessage.svelte
+│  │  │  │  ├─ Messages.svelte
+│  │  │  │  ├─ ModelSelector
+│  │  │  │  │  └─ Selector.svelte
+│  │  │  │  ├─ ModelSelector.svelte
+│  │  │  │  ├─ Overview
+│  │  │  │  │  ├─ Flow.svelte
+│  │  │  │  │  └─ Node.svelte
+│  │  │  │  ├─ Overview.svelte
+│  │  │  │  ├─ Placeholder.svelte
+│  │  │  │  ├─ Settings
+│  │  │  │  │  ├─ Account
+│  │  │  │  │  │  └─ UpdatePassword.svelte
+│  │  │  │  │  ├─ Account.svelte
+│  │  │  │  │  ├─ Advanced
+│  │  │  │  │  │  └─ AdvancedParams.svelte
+│  │  │  │  │  ├─ Audio.svelte
+│  │  │  │  │  ├─ Chats.svelte
+│  │  │  │  │  ├─ General.svelte
+│  │  │  │  │  ├─ Interface.svelte
+│  │  │  │  │  ├─ Personalization
+│  │  │  │  │  │  ├─ AddMemoryModal.svelte
+│  │  │  │  │  │  ├─ EditMemoryModal.svelte
+│  │  │  │  │  │  └─ ManageModal.svelte
+│  │  │  │  │  └─ Personalization.svelte
+│  │  │  │  ├─ SettingsModal.svelte
+│  │  │  │  ├─ ShareChatModal.svelte
+│  │  │  │  ├─ ShortcutsModal.svelte
+│  │  │  │  ├─ Suggestions.svelte
+│  │  │  │  ├─ TagChatModal.svelte
+│  │  │  │  └─ Tags.svelte
+│  │  │  ├─ common
+│  │  │  │  ├─ Badge.svelte
+│  │  │  │  ├─ Banner.svelte
+│  │  │  │  ├─ Checkbox.svelte
+│  │  │  │  ├─ CodeEditor.svelte
+│  │  │  │  ├─ Collapsible.svelte
+│  │  │  │  ├─ ConfirmDialog.svelte
+│  │  │  │  ├─ DragGhost.svelte
+│  │  │  │  ├─ Drawer.svelte
+│  │  │  │  ├─ Dropdown.svelte
+│  │  │  │  ├─ FileItem.svelte
+│  │  │  │  ├─ FileItemModal.svelte
+│  │  │  │  ├─ Folder.svelte
+│  │  │  │  ├─ Image.svelte
+│  │  │  │  ├─ ImagePreview.svelte
+│  │  │  │  ├─ Loader.svelte
+│  │  │  │  ├─ Marquee.svelte
+│  │  │  │  ├─ Modal.svelte
+│  │  │  │  ├─ Overlay.svelte
+│  │  │  │  ├─ Pagination.svelte
+│  │  │  │  ├─ RichTextInput.svelte
+│  │  │  │  ├─ SVGPanZoom.svelte
+│  │  │  │  ├─ Selector.svelte
+│  │  │  │  ├─ SensitiveInput.svelte
+│  │  │  │  ├─ Sidebar.svelte
+│  │  │  │  ├─ SlideShow.svelte
+│  │  │  │  ├─ Spinner.svelte
+│  │  │  │  ├─ Switch.svelte
+│  │  │  │  ├─ Tags
+│  │  │  │  │  ├─ TagInput.svelte
+│  │  │  │  │  └─ TagList.svelte
+│  │  │  │  ├─ Tags.svelte
+│  │  │  │  ├─ Textarea.svelte
+│  │  │  │  ├─ Tooltip.svelte
+│  │  │  │  └─ Valves.svelte
+│  │  │  ├─ icons
+│  │  │  │  ├─ AdjustmentsHorizontal.svelte
+│  │  │  │  ├─ ArchiveBox.svelte
+│  │  │  │  ├─ ArrowDownTray.svelte
+│  │  │  │  ├─ ArrowLeft.svelte
+│  │  │  │  ├─ ArrowPath.svelte
+│  │  │  │  ├─ ArrowRight.svelte
+│  │  │  │  ├─ ArrowRightCircle.svelte
+│  │  │  │  ├─ ArrowUpCircle.svelte
+│  │  │  │  ├─ ArrowsPointingOut.svelte
+│  │  │  │  ├─ BarsArrowUp.svelte
+│  │  │  │  ├─ Bolt.svelte
+│  │  │  │  ├─ BookOpen.svelte
+│  │  │  │  ├─ Bookmark.svelte
+│  │  │  │  ├─ BookmarkSlash.svelte
+│  │  │  │  ├─ ChartBar.svelte
+│  │  │  │  ├─ ChatBubble.svelte
+│  │  │  │  ├─ ChatBubbleOval.svelte
+│  │  │  │  ├─ ChatBubbles.svelte
+│  │  │  │  ├─ Check.svelte
+│  │  │  │  ├─ ChevronDown.svelte
+│  │  │  │  ├─ ChevronLeft.svelte
+│  │  │  │  ├─ ChevronRight.svelte
+│  │  │  │  ├─ ChevronUp.svelte
+│  │  │  │  ├─ ChevronUpDown.svelte
+│  │  │  │  ├─ Clipboard.svelte
+│  │  │  │  ├─ CloudArrowUp.svelte
+│  │  │  │  ├─ Cog6.svelte
+│  │  │  │  ├─ Cube.svelte
+│  │  │  │  ├─ Document.svelte
+│  │  │  │  ├─ DocumentArrowDown.svelte
+│  │  │  │  ├─ DocumentArrowUpSolid.svelte
+│  │  │  │  ├─ DocumentChartBar.svelte
+│  │  │  │  ├─ DocumentDuplicate.svelte
+│  │  │  │  ├─ Download.svelte
+│  │  │  │  ├─ EllipsisHorizontal.svelte
+│  │  │  │  ├─ EllipsisVertical.svelte
+│  │  │  │  ├─ EyeSlash.svelte
+│  │  │  │  ├─ FloppyDisk.svelte
+│  │  │  │  ├─ FolderOpen.svelte
+│  │  │  │  ├─ GarbageBin.svelte
+│  │  │  │  ├─ GlobeAlt.svelte
+│  │  │  │  ├─ GlobeAltSolid.svelte
+│  │  │  │  ├─ Headphone.svelte
+│  │  │  │  ├─ Heart.svelte
+│  │  │  │  ├─ Info.svelte
+│  │  │  │  ├─ Keyboard.svelte
+│  │  │  │  ├─ Lifebuoy.svelte
+│  │  │  │  ├─ LightBlub.svelte
+│  │  │  │  ├─ Link.svelte
+│  │  │  │  ├─ LockClosed.svelte
+│  │  │  │  ├─ MagnifyingGlass.svelte
+│  │  │  │  ├─ Map.svelte
+│  │  │  │  ├─ MenuLines.svelte
+│  │  │  │  ├─ Merge.svelte
+│  │  │  │  ├─ Mic.svelte
+│  │  │  │  ├─ Minus.svelte
+│  │  │  │  ├─ Pencil.svelte
+│  │  │  │  ├─ PencilSolid.svelte
+│  │  │  │  ├─ PencilSquare.svelte
+│  │  │  │  ├─ Plus.svelte
+│  │  │  │  ├─ QuestionMarkCircle.svelte
+│  │  │  │  ├─ Search.svelte
+│  │  │  │  ├─ Share.svelte
+│  │  │  │  ├─ Sparkles.svelte
+│  │  │  │  ├─ SparklesSolid.svelte
+│  │  │  │  ├─ Star.svelte
+│  │  │  │  ├─ User.svelte
+│  │  │  │  ├─ UserCircleSolid.svelte
+│  │  │  │  ├─ UserPlusSolid.svelte
+│  │  │  │  ├─ UsersSolid.svelte
+│  │  │  │  ├─ Wrench.svelte
+│  │  │  │  ├─ WrenchSolid.svelte
+│  │  │  │  └─ XMark.svelte
+│  │  │  ├─ playground
+│  │  │  │  ├─ Chat
+│  │  │  │  │  └─ Messages.svelte
+│  │  │  │  ├─ Chat.svelte
+│  │  │  │  ├─ Completions.svelte
+│  │  │  │  └─ Notes.svelte
+│  │  │  └─ workspace
+│  │  │     ├─ Knowledge
+│  │  │     │  ├─ CreateKnowledgeBase.svelte
+│  │  │     │  ├─ ItemMenu.svelte
+│  │  │     │  ├─ KnowledgeBase
+│  │  │     │  │  ├─ AddContentMenu.svelte
+│  │  │     │  │  ├─ AddTextContentModal.svelte
+│  │  │     │  │  └─ Files.svelte
+│  │  │     │  └─ KnowledgeBase.svelte
+│  │  │     ├─ Knowledge.svelte
+│  │  │     ├─ Models
+│  │  │     │  ├─ ActionsSelector.svelte
+│  │  │     │  ├─ Capabilities.svelte
+│  │  │     │  ├─ FiltersSelector.svelte
+│  │  │     │  ├─ Knowledge
+│  │  │     │  │  └─ Selector.svelte
+│  │  │     │  ├─ Knowledge.svelte
+│  │  │     │  ├─ ModelEditor.svelte
+│  │  │     │  ├─ ModelMenu.svelte
+│  │  │     │  └─ ToolsSelector.svelte
+│  │  │     ├─ Models.svelte
+│  │  │     ├─ Prompts
+│  │  │     │  ├─ PromptEditor.svelte
+│  │  │     │  └─ PromptMenu.svelte
+│  │  │     ├─ Prompts.svelte
+│  │  │     ├─ Tools
+│  │  │     │  ├─ ToolMenu.svelte
+│  │  │     │  └─ ToolkitEditor.svelte
+│  │  │     ├─ Tools.svelte
+│  │  │     └─ common
+│  │  │        ├─ AccessControl.svelte
+│  │  │        ├─ AccessControlModal.svelte
+│  │  │        ├─ ManifestModal.svelte
+│  │  │        └─ ValvesModal.svelte
+│  │  ├─ constants.ts
+│  │  ├─ i18n
+│  │  │  ├─ index.ts
+│  │  │  └─ locales
+│  │  │     ├─ ar-BH
+│  │  │     │  └─ translation.json
+│  │  │     ├─ bg-BG
+│  │  │     │  └─ translation.json
+│  │  │     ├─ bn-BD
+│  │  │     │  └─ translation.json
+│  │  │     ├─ ca-ES
+│  │  │     │  └─ translation.json
+│  │  │     ├─ ceb-PH
+│  │  │     │  └─ translation.json
+│  │  │     ├─ cs-CZ
+│  │  │     │  └─ translation.json
+│  │  │     ├─ da-DK
+│  │  │     │  └─ translation.json
+│  │  │     ├─ de-DE
+│  │  │     │  └─ translation.json
+│  │  │     ├─ dg-DG
+│  │  │     │  └─ translation.json
+│  │  │     ├─ en-GB
+│  │  │     │  └─ translation.json
+│  │  │     ├─ en-US
+│  │  │     │  └─ translation.json
+│  │  │     ├─ es-ES
+│  │  │     │  └─ translation.json
+│  │  │     ├─ fa-IR
+│  │  │     │  └─ translation.json
+│  │  │     ├─ fi-FI
+│  │  │     │  └─ translation.json
+│  │  │     ├─ fr-CA
+│  │  │     │  └─ translation.json
+│  │  │     ├─ fr-FR
+│  │  │     │  └─ translation.json
+│  │  │     ├─ he-IL
+│  │  │     │  └─ translation.json
+│  │  │     ├─ hi-IN
+│  │  │     │  └─ translation.json
+│  │  │     ├─ hr-HR
+│  │  │     │  └─ translation.json
+│  │  │     ├─ hu-HU
+│  │  │     │  └─ translation.json
+│  │  │     ├─ id-ID
+│  │  │     │  └─ translation.json
+│  │  │     ├─ ie-GA
+│  │  │     │  └─ translation.json
+│  │  │     ├─ it-IT
+│  │  │     │  └─ translation.json
+│  │  │     ├─ ja-JP
+│  │  │     │  └─ translation.json
+│  │  │     ├─ ka-GE
+│  │  │     │  └─ translation.json
+│  │  │     ├─ ko-KR
+│  │  │     │  └─ translation.json
+│  │  │     ├─ languages.json
+│  │  │     ├─ lt-LT
+│  │  │     │  └─ translation.json
+│  │  │     ├─ ms-MY
+│  │  │     │  └─ translation.json
+│  │  │     ├─ nb-NO
+│  │  │     │  └─ translation.json
+│  │  │     ├─ nl-NL
+│  │  │     │  └─ translation.json
+│  │  │     ├─ pa-IN
+│  │  │     │  └─ translation.json
+│  │  │     ├─ pl-PL
+│  │  │     │  └─ translation.json
+│  │  │     ├─ pt-BR
+│  │  │     │  └─ translation.json
+│  │  │     ├─ pt-PT
+│  │  │     │  └─ translation.json
+│  │  │     ├─ ro-RO
+│  │  │     │  └─ translation.json
+│  │  │     ├─ ru-RU
+│  │  │     │  └─ translation.json
+│  │  │     ├─ sr-RS
+│  │  │     │  └─ translation.json
+│  │  │     ├─ sv-SE
+│  │  │     │  └─ translation.json
+│  │  │     ├─ th-TH
+│  │  │     │  └─ translation.json
+│  │  │     ├─ tk-TM
+│  │  │     │  └─ translation.json
+│  │  │     ├─ tk-TW
+│  │  │     │  └─ translation.json
+│  │  │     ├─ tr-TR
+│  │  │     │  └─ translation.json
+│  │  │     ├─ uk-UA
+│  │  │     │  └─ translation.json
+│  │  │     ├─ ur-PK
+│  │  │     │  └─ translation.json
+│  │  │     ├─ vi-VN
+│  │  │     │  └─ translation.json
+│  │  │     ├─ zh-CN
+│  │  │     │  └─ translation.json
+│  │  │     └─ zh-TW
+│  │  │        └─ translation.json
+│  │  ├─ index.ts
+│  │  ├─ stores
+│  │  │  └─ index.ts
+│  │  ├─ types
+│  │  │  └─ index.ts
+│  │  ├─ utils
+│  │  │  ├─ _template_old.ts
+│  │  │  ├─ characters
+│  │  │  │  └─ index.ts
+│  │  │  ├─ index.ts
+│  │  │  ├─ marked
+│  │  │  │  ├─ extension.ts
+│  │  │  │  └─ katex-extension.ts
+│  │  │  ├─ rag
+│  │  │  │  └─ index.ts
+│  │  │  └─ transitions
+│  │  │     └─ index.ts
+│  │  └─ workers
+│  │     └─ pyodide.worker.ts
+│  └─ tailwind.css
+├─ static
+│  ├─ assets
+│  │  ├─ fonts
+│  │  │  ├─ Archivo-Variable.ttf
+│  │  │  ├─ InstrumentSerif-Italic.ttf
+│  │  │  ├─ InstrumentSerif-Regular.ttf
+│  │  │  ├─ Inter-Variable.ttf
+│  │  │  └─ Mona-Sans.woff2
+│  │  └─ images
+│  │     ├─ adam.jpg
+│  │     ├─ earth.jpg
+│  │     ├─ galaxy.jpg
+│  │     └─ space.jpg
+│  ├─ audio
+│  │  └─ greeting.mp3
+│  ├─ doge.png
+│  ├─ favicon.png
+│  ├─ manifest.json
+│  ├─ opensearch.xml
+│  ├─ pyodide
+│  │  └─ pyodide-lock.json
+│  ├─ robots.txt
+│  ├─ static
+│  │  ├─ favicon.png
+│  │  ├─ splash-dark.png
+│  │  └─ splash.png
+│  ├─ themes
+│  │  ├─ rosepine-dawn.css
+│  │  └─ rosepine.css
+│  └─ user.png
+├─ svelte.config.js
+├─ tailwind.config.js
+├─ test
+│  └─ test_files
+│     └─ image_gen
+│        └─ sd-empty.pt
+├─ tsconfig.json
+├─ update_ollama_models.sh
+├─ uv.lock
+└─ vite.config.ts
+
+```
