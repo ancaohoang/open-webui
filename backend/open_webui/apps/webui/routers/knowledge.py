@@ -1,5 +1,6 @@
 import json
 from typing import Optional, Union
+from backend.open_webui.apps.retrieval.loaders.github_loader import setup_github_rag_loader
 from pydantic import BaseModel
 from fastapi import APIRouter, Depends, HTTPException, status, Request
 import logging
@@ -223,6 +224,47 @@ async def update_knowledge_by_id(
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=ERROR_MESSAGES.ID_TAKEN,
+        )
+
+
+############################
+# 
+############################
+
+
+@router.get("/{id}/embedding", response_model=Optional[KnowledgeFilesResponse])
+async def get_knowledge_embedding_by_id(
+    id: str,
+    user=Depends(get_verified_user),
+):
+    knowledge = Knowledges.get_knowledge_by_id(id=id)
+
+    if not knowledge:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=ERROR_MESSAGES.NOT_FOUND,
+        )
+
+    if knowledge.user_id != user.id and user.role != "admin":
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=ERROR_MESSAGES.ACCESS_PROHIBITED,
+        )
+    
+    if knowledge.type == "Github":
+        # Custom loader for GitHub
+        repo_url = knowledge.secret  # Assuming secret stores repo URL
+        vector_db = await setup_github_rag_loader(repo_url)
+        return {"detail": "Embedding completed for GitHub repository"}
+    
+    elif knowledge.type == "Slack":
+        # Custom loader for Slack (to be implemented)
+        raise NotImplementedError("SlackLoader embedding is not implemented yet")
+
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Embedding not supported for type: {knowledge.type}",
         )
 
 

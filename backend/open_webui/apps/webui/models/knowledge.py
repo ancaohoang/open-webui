@@ -35,6 +35,8 @@ class Knowledge(Base):
 
     data = Column(JSON, nullable=True)
     meta = Column(JSON, nullable=True)
+    type = Column(Text) # ["File", "GitHub", "Slack"]
+    secret = Column(Text)
 
     access_control = Column(JSON, nullable=True)  # Controls data access levels.
     # Defines access control rules for this entry.
@@ -69,6 +71,9 @@ class KnowledgeModel(BaseModel):
     data: Optional[dict] = None
     meta: Optional[dict] = None
 
+    type: str
+    secret: str
+
     access_control: Optional[dict] = None
 
     created_at: int  # timestamp in epoch
@@ -95,8 +100,10 @@ class KnowledgeUserResponse(KnowledgeUserModel):
 class KnowledgeForm(BaseModel):
     name: str
     description: str
+    type: str
     data: Optional[dict] = None
     access_control: Optional[dict] = None
+    secret: str
 
 
 class KnowledgeTable:
